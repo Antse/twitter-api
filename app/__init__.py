@@ -2,8 +2,11 @@ from flask import Flask, request
 from flask_restplus import Api
 
 from flask_sqlalchemy import SQLAlchemy
+from flask_marshmallow import Marshmallow
 
 db = SQLAlchemy()
+ma = Marshmallow()
+
 
 def create_app():
     app = Flask(__name__)
@@ -24,17 +27,3 @@ def create_app():
     app.config['ERROR_404_HELP'] = False
     return app
 
-# def create_app():
-#     app = Flask(__name__)
-
-#     @app.route('/hello')
-#     def hello():
-#         return "Goodbye World!"
-
-#     from .apis.tweets import api as tweets
-#     api = Api()
-#     api.add_namespace(tweets)
-#     api.init_app(app)
-
-#     app.config['ERROR_404_HELP'] = False
-#     return app

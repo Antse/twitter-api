@@ -22,10 +22,21 @@ class TestTweetViews(TestCase):
         db.session.commit()
         response = self.client.get("/tweets/1")
         response_tweet = response.json
-        print(response_tweet)
         self.assertEqual(response_tweet["id"], 1)
         self.assertEqual(response_tweet["text"], "A test tweet")
         self.assertIsNotNone(response_tweet["created_at"])
+
+    def test_tweet_show_all(self):
+        tweet = Tweet(text="A test tweet")
+        db.session.add(tweet)
+        db.session.add(tweet)
+        db.session.add(tweet)
+        db.session.add(tweet)
+        db.session.commit()
+        response = self.client.get("/tweets")
+        response_tweet = response.json
+        self.assertEqual(len(response_tweet), 3)
+
 
     def test_tweet_create(self):
         response = self.client.post("/tweets", json={'text': 'New text!'})
