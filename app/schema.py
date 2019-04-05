@@ -2,10 +2,10 @@
 from app import ma
 from app.models import Tweet
 
-class ProductSchema(ma.Schema):
+class TweetSchema(ma.Schema):
     class Meta:
         model = Tweet
-        fields = ('id', 'text') # These are the fields we want in the JSON!
+        fields = ('id', 'text', 'created_at') # These are the fields we want in the JSON!
 
-twwet_schema = TweetSchema()
+tweet_schema = TweetSchema()
 tweets_schema = TweetSchema(many=True)
